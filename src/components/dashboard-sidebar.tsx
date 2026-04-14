@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
   Sidebar,
@@ -12,22 +12,18 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import {
-  LayoutDashboard,
-  Zap,
-  LogOut,
-  Leaf,
-} from "lucide-react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+} from "@/components/ui/sidebar";
+import { LayoutDashboard, Zap, LogOut, Leaf } from "lucide-react";
+import { signOut } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const mainNavItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
-]
+];
 
 export function DashboardSidebar() {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <Sidebar className="border-r border-zinc-800/50">
@@ -81,21 +77,28 @@ export function DashboardSidebar() {
                 <Zap className="w-4 h-4 text-emerald-500" />
               </div>
               <div className="flex flex-col overflow-hidden">
-                <span className="text-sm font-medium text-foreground truncate">System Online</span>
-                <span className="text-[10px] text-emerald-500 truncate">All sensors active</span>
+                <span className="text-sm font-medium text-foreground truncate">
+                  System Online
+                </span>
+                <span className="text-[10px] text-emerald-500 truncate">
+                  All sensors active
+                </span>
               </div>
             </div>
           </SidebarMenuItem>
-          
+
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
               className="h-10 px-3 hover:bg-red-500/10 text-muted-foreground hover:text-red-400 transition-colors"
             >
-              <Link href="/admin/login">
+              <button
+                onClick={() => signOut({ callbackUrl: "/" })}
+                className="flex items-center gap-2 w-full" // Tambahkan class styling sesuai kebutuhanmu (hover, text-red, dll)
+              >
                 <LogOut className="w-4 h-4" />
                 <span>Logout</span>
-              </Link>
+              </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -103,5 +106,5 @@ export function DashboardSidebar() {
 
       <SidebarRail />
     </Sidebar>
-  )
+  );
 }
