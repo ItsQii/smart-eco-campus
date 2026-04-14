@@ -30,7 +30,7 @@ export function HeroSection() {
         {/* Subheadline */}
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed text-pretty">
           Transform your campus into an intelligent, sustainable ecosystem. 
-          Harness the power of IoT sensors, AI Vision, and Big Data analytics 
+          Harness the power of IoT sensors, Cloud Computing, Big Data analytics 
           to optimize energy consumption and reduce environmental impact.
         </p>
 
