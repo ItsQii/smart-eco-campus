@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Eco-Campus
+
+**Smart Eco-Campus Efficiency System** is a modern, IoT-integrated platform designed to optimize energy consumption and enhance sustainability across campus facilities. Built with cutting-edge technologies, it provides real-time monitoring and control of classroom environments.
+
+---
+
+## Key Features
+
+- **Real-time Device Control**: Manage classroom lights, AC/Fans, and power sockets remotely.
+- **Energy Monitoring**: Track power usage (Watts) across different zones to identify efficiency opportunities.
+- **IoT Integration**: Seamless interaction with smart hardware for live status updates.
+- **Secure Access**: Role-based authentication system built with NextAuth.
+- **Modern Dashboard**: A high-performance, responsive UI optimized for both desktop and mobile monitoring.
+- **Sustainability Focus**: Visual indicators and data insights to promote an eco-friendly campus culture.
+
+---
+
+## Tech Stack
+
+- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
+- **Core**: [React 19](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **UI Components**: [Radix UI](https://www.radix-ui.com/), [Lucide Icons](https://lucide.dev/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/)
+- **Build Tool**: [Turbopack](https://nextjs.org/docs/app/api-reference/turbopack)
+- **Package Manager**: [pnpm](https://pnpm.io/)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 20+ 
+- pnpm installed (`npm install -g pnpm`)
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/ItsQii/smart-eco-campus.git
+   cd smart-eco-campus
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   pnpm install
+   ```
+
+3. **Set up environment variables**:
+   Create a `.env.local` file in the root directory and add necessary variables (see `.env.example` if available).
+
+4. **Run the development server**:
+   ```bash
+   pnpm dev
+   ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+- `src/app`: Next.js App Router pages and layouts.
+- `src/components`: Reusable UI components (Shadcn UI based).
+- `src/services`: API and Authentication logic.
+- `src/types`: TypeScript interfaces and types.
+- `public`: Static assets and icons.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
