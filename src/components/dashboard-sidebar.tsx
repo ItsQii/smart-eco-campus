@@ -13,13 +13,14 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Zap, LogOut, Leaf } from "lucide-react";
+import { LayoutDashboard, Zap, LogOut, Leaf, Power } from "lucide-react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const mainNavItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
+    { title: "Device Control", icon: Power, href: "/dashboard/devices" },
 ];
 
 export function DashboardSidebar() {
