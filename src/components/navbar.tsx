@@ -1,14 +1,12 @@
 "use client"
-
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Leaf, Menu, X } from "lucide-react"
 import { useState } from "react"
 
 const navLinks = [
-  { label: "Features", href: "#features" },
   { label: "How It Works", href: "#how-it-works" },
   { label: "Team", href: "#team" },
-  { label: "Contact", href: "#contact" },
 ]
 
 export function Navbar() {
@@ -42,13 +40,16 @@ export function Navbar() {
 
         {/* CTA Button */}
         <div className="hidden md:block">
-          <Button 
-            size="sm"
-            className="bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-medium"
-          >
-            Get Started
-          </Button>
+          <Link href="/admin/login">
+            <Button 
+              size="sm"
+              className="bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-medium"
+            >
+              Get Started
+            </Button>
+          </Link>
         </div>
+        
 
         {/* Mobile Menu Button */}
         <button

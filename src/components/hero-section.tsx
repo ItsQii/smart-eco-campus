@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Leaf, Zap } from "lucide-react"
+import Link from "next/link"
 
 export function HeroSection() {
   return (
@@ -35,21 +36,31 @@ export function HeroSection() {
 
         {/* CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Button 
-            size="lg" 
-            className="bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-semibold px-8 py-6 text-lg rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25"
+          <Link href="/admin/login">
+            <Button 
+              size="lg" 
+              className="bg-emerald-500 hover:bg-emerald-600 text-zinc-950 font-semibold px-8 py-6 text-lg rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/25"
+            >
+              <Zap className="w-5 h-5 mr-2" />
+              Get Started
+              <ArrowRight className="w-5 h-5 ml-2" />
+            </Button>
+          </Link>
+          
+          {/* <-- BUNGKUS DENGAN LINK MENUJU FIGMA --> */}
+          <Link 
+            href="https://www.figma.com/design/IK9Jg9wwmlAI00nbn67KKz/PBL-S6?node-id=0-1&t=zoONDr2RXIHH46th-0" 
+            target="_blank" 
+            rel="noopener noreferrer"
           >
-            <Zap className="w-5 h-5 mr-2" />
-            Get Started
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
-          <Button 
-            variant="outline" 
-            size="lg"
-            className="border-zinc-700 hover:border-emerald-500/50 hover:bg-emerald-500/5 text-foreground px-8 py-6 text-lg rounded-lg transition-all duration-300"
-          >
-            View Demo
-          </Button>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="border-zinc-700 hover:border-emerald-500/50 hover:bg-emerald-500/5 text-foreground px-8 py-6 text-lg rounded-lg transition-all duration-300"
+            >
+              View Wireframe
+            </Button>
+          </Link>
         </div>
 
         {/* Stats */}
