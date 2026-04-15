@@ -14,17 +14,34 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { LayoutDashboard, Zap, LogOut, Leaf, Power } from "lucide-react";
-import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+
+// --- TAMBAHAN UNTUK FIREBASE LOGOUT ---
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
+// --------------------------------------
 
 const mainNavItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
-    { title: "Device Control", icon: Power, href: "/dashboard/devices" },
+  { title: "Device Control", icon: Power, href: "/dashboard/devices" },
 ];
 
 export function DashboardSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  // Fungsi untuk Logout Firebase
+  const handleLogout = async () => {
+    try {
+      await signOut(auth); // Proses logout dari Firebase
+      // --- PERUBAHAN DI SINI ---
+      router.push("/"); // Arahkan kembali ke halaman beranda (Homepage)
+      // -------------------------
+    } catch (error) {
+      console.error("Gagal logout:", error);
+    }
+  };
 
   return (
     <Sidebar className="border-r border-zinc-800/50">
@@ -91,11 +108,11 @@ export function DashboardSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="h-10 px-3 hover:bg-red-500/10 text-muted-foreground hover:text-red-400 transition-colors"
+              className="h-10 px-3 hover:bg-red-500/10 text-muted-foreground hover:text-red-400 transition-colors cursor-pointer"
             >
               <button
-                onClick={() => signOut({ callbackUrl: "/" })}
-                className="flex items-center gap-2 w-full" // Tambahkan class styling sesuai kebutuhanmu (hover, text-red, dll)
+                onClick={handleLogout}
+                className="flex items-center gap-2 w-full text-left" 
               >
                 <LogOut className="w-4 h-4" />
                 <span>Logout</span>
