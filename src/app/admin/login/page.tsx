@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation"; // <-- Tambahan untuk pindah halaman
+import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react"; // <-- IMPORT PENTING INI DITAMBAHKAN
 import { Shield, Lock, Mail, ArrowRight, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,19 +14,31 @@ export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter(); // <-- Inisialisasi router
+  const [error, setError] = useState(""); // <-- State untuk menyimpan pesan error
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    // Simulasi proses loading (1.5 detik)
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    
+    setError(""); // Kosongkan error setiap kali mencoba login baru
+
+    // Memanggil sistem NextAuth yang sesungguhnya
+    const res = await signIn("credentials", {
+      email: email,
+      password: password,
+      redirect: false, // Jangan pindah halaman otomatis, biar kita bisa tangkap errornya
+    });
+
     setIsLoading(false);
 
-    // <-- Arahkan user ke halaman dashboard setelah loading selesai
-    router.push("/dashboard"); 
+    if (res?.error) {
+      // Jika login ditolak oleh route.ts
+      setError("Email atau password tidak valid.");
+    } else if (res?.ok) {
+      // Jika login berhasil
+      router.push("/dashboard");
+      router.refresh(); // Memaksa Next.js menyadari bahwa kamu sudah login
+    }
   };
 
   return (
@@ -35,7 +48,7 @@ export default function AdminLoginPage() {
         className="absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage: `linear-gradient(rgba(16, 185, 129, 0.4) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(16, 185, 129, 0.4) 1px, transparent 1px)`,
+                            linear-gradient(90deg, rgba(16, 185, 129, 0.4) 1px, transparent 1px)`,
           backgroundSize: "60px 60px",
         }}
       />
@@ -75,6 +88,14 @@ export default function AdminLoginPage() {
 
           <CardContent>
             <form onSubmit={handleSubmit}>
+              
+              {/* Notifikasi Error Muncul di Sini */}
+              {error && (
+                <div className="mb-4 p-3 rounded-lg border border-red-500/20 bg-red-500/10 text-center">
+                  <p className="text-sm text-red-500 font-medium">{error}</p>
+                </div>
+              )}
+
               <FieldGroup>
                 <Field>
                   <FieldLabel className="text-zinc-400 text-sm">
