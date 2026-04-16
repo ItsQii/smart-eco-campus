@@ -16,12 +16,10 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        // DI SINI ADALAH LOGIKA LOGIN EMAIL & PASSWORD
-        // Contoh: Panggil API backend kamu atau cek ke database Prisma/Mongoose
         
         // --- Contoh statis (Hapus ini jika pakai database sungguhan) ---
-        if (credentials?.email === "admin@ecocampus.io" && credentials?.password === "admin123") {
-          return { id: "1", name: "Admin", email: "admin@ecocampus.io" };
+        if (credentials?.email === "admin1@gmail.com" && credentials?.password === "admin123") {
+          return { id: "1", name: "Admin", email: "admin1@gmail.com" };
         }
         // ---------------------------------------------------------------
         
@@ -31,7 +29,7 @@ const handler = NextAuth({
     })
   ],
   pages: {
-    signIn: '/login', // Arahkan ke halaman page.tsx login kamu
+    signIn: '/admin/login', // Arahkan ke halaman page.tsx login kamu
   },
   session: {
     strategy: "jwt",
