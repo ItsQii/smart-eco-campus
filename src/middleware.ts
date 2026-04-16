@@ -1,12 +1,8 @@
-// middleware.ts
-import { withAuth } from "next-auth/middleware";
+// middleware.ts (atau src/middleware.ts)
+export { default } from "next-auth/middleware";
 
-export default withAuth({
-  pages: {
-    signIn: "/admin/login",
-  },
-});
-
+// Tentukan rute mana saja yang ingin diproteksi
 export const config = {
+  // Melindungi /dashboard dan semua sub-rutenya (misal: /dashboard/settings)
   matcher: ["/dashboard/:path*", "/dashboard"],
 };

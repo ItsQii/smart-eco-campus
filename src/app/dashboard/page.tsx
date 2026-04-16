@@ -4,9 +4,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { RadialGauge } from "@/components/radial-gauge"
 import { Camera, Users, Wifi, Activity, AlertCircle } from "lucide-react"
 import { useEffect, useState } from "react"
+import { doc, setDoc } from "firebase/firestore"  
+import { db } from "@/lib/firebase"
 
 export default function DashboardPage() {
-  // Simulated real-time data
+  // State untuk menyimpan data yang tampil di UI
   const [metrics, setMetrics] = useState({
     watt: 124.5,
     volt: 220.8,
@@ -14,16 +16,33 @@ export default function DashboardPage() {
     occupancy: 0,
   })
 
-  // Simulate real-time data updates
+  // Simulate real-time data updates & Send to Firebase
   useEffect(() => {
-    const interval = setInterval(() => {
-      setMetrics({
+    // Tambahkan "async" di sini karena kita mau pakai "await" untuk Firebase
+    const interval = setInterval(async () => {
+      
+      // 1. Generate data dummy
+      const newData = {
         watt: 120 + Math.random() * 20,
         volt: 218 + Math.random() * 5,
         ampere: 0.5 + Math.random() * 0.2,
         occupancy: Math.floor(Math.random() * 5),
-      })
-    }, 3000)
+        timestamp: new Date().toISOString()
+      }
+
+      setMetrics(newData)
+
+      // 3. Kirim ke Firebase Firestore
+      try {
+        // Kita simpan di koleksi "sensors", dokumen bernama "latest"
+        const docRef = doc(db, "sensors", "latest");
+        await setDoc(docRef, newData);
+        console.log("✅ Berhasil update Firebase:", newData.watt.toFixed(2), "Watt");
+      } catch (error) {
+        console.error("❌ Gagal mengirim ke Firebase:", error);
+      }
+
+    }, 5000)
 
     return () => clearInterval(interval)
   }, [])
