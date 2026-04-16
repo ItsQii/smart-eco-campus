@@ -91,7 +91,7 @@ export function DashboardSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <div className="flex items-center gap-3 h-10 px-3">
-              <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
                 <Zap className="w-4 h-4 text-emerald-500" />
               </div>
               <div className="flex flex-col overflow-hidden">
