@@ -1,17 +1,20 @@
-// src\lib\firebase.ts
+// src/lib/firebase.ts
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDIDjKcHfdgbLuAoZLxSwhHQAp8PZtIAbY",
-  authDomain: "ecocampus-bf3b1.firebaseapp.com",
-  projectId: "ecocampus-bf3b1",
-  storageBucket: "ecocampus-bf3b1.firebasestorage.app",
-  messagingSenderId: "286725868103",
-  appId: "1:286725868103:web:3cb86c5327fc1a29953f62",
-  measurementId: "G-34LLFQNJYF"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 // Mencegah inisialisasi ganda saat Next.js me-reload halaman
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
 export const auth = getAuth(app);
+export const db = getFirestore(app);
