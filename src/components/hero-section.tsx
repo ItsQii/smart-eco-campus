@@ -62,22 +62,6 @@ export function HeroSection() {
             </Button>
           </Link>
         </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-8 mt-20 pt-10 border-t border-zinc-800">
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-emerald-500">40%</p>
-            <p className="text-sm text-muted-foreground mt-1">Energy Savings</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-emerald-500">10K+</p>
-            <p className="text-sm text-muted-foreground mt-1">IoT Sensors</p>
-          </div>
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-bold text-emerald-500">24/7</p>
-            <p className="text-sm text-muted-foreground mt-1">Real-time Monitoring</p>
-          </div>
-        </div>
       </div>
 
       {/* Bottom gradient fade */}
