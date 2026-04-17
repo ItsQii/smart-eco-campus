@@ -20,35 +20,26 @@ import {
   LogOut,
   Leaf,
   Power,
-  FileText, // 🔥 icon logs
+  FileText,
 } from "lucide-react";
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-// Firebase logout
-import { signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { signOut } from "next-auth/react";
 
-// ✅ NAV ITEMS (SUDAH DITAMBAH LOGS)
 const mainNavItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
   { title: "Device Control", icon: Power, href: "/dashboard/devices" },
-  { title: "Logs", icon: FileText, href: "/dashboard/logs" }, // 🔥 TAMBAHAN
+  { title: "Logs", icon: FileText, href: "/dashboard/logs" },
 ];
 
 export function DashboardSidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // 🔥 Logout Firebase
   const handleLogout = async () => {
-    try {
-      await signOut(auth);
-      router.push("/");
-    } catch (error) {
-      console.error("Gagal logout:", error);
-    }
+    await signOut({ callbackUrl: "/" });
   };
 
   return (
