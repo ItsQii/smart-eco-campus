@@ -13,31 +13,39 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { LayoutDashboard, Zap, LogOut, Leaf, Power } from "lucide-react";
+
+import {
+  LayoutDashboard,
+  Zap,
+  LogOut,
+  Leaf,
+  Power,
+  FileText, // 🔥 icon logs
+} from "lucide-react";
+
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-// --- TAMBAHAN UNTUK FIREBASE LOGOUT ---
+// Firebase logout
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-// --------------------------------------
 
+// ✅ NAV ITEMS (SUDAH DITAMBAH LOGS)
 const mainNavItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
   { title: "Device Control", icon: Power, href: "/dashboard/devices" },
+  { title: "Logs", icon: FileText, href: "/dashboard/logs" }, // 🔥 TAMBAHAN
 ];
 
 export function DashboardSidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Fungsi untuk Logout Firebase
+  // 🔥 Logout Firebase
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Proses logout dari Firebase
-      // --- PERUBAHAN DI SINI ---
-      router.push("/"); // Arahkan kembali ke halaman beranda (Homepage)
-      // -------------------------
+      await signOut(auth);
+      router.push("/");
     } catch (error) {
       console.error("Gagal logout:", error);
     }
@@ -45,6 +53,7 @@ export function DashboardSidebar() {
 
   return (
     <Sidebar className="border-r border-zinc-800/50">
+      {/* HEADER */}
       <SidebarHeader className="border-b border-zinc-800/50 px-4 py-4">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center group-hover:bg-emerald-500/20 transition-colors duration-300">
@@ -61,11 +70,13 @@ export function DashboardSidebar() {
         </Link>
       </SidebarHeader>
 
+      {/* MENU */}
       <SidebarContent className="px-2 py-4">
         <SidebarGroup>
           <SidebarGroupLabel className="text-xs text-muted-foreground uppercase tracking-wider px-3 mb-2">
             Main Menu
           </SidebarGroupLabel>
+
           <SidebarGroupContent>
             <SidebarMenu>
               {mainNavItems.map((item) => (
@@ -87,8 +98,10 @@ export function DashboardSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
+      {/* FOOTER */}
       <SidebarFooter className="border-t border-zinc-800/50 px-2 py-4 gap-2">
         <SidebarMenu>
+          {/* STATUS */}
           <SidebarMenuItem>
             <div className="flex items-center gap-3 h-10 px-3">
               <div className="w-8 h-8 rounded-full bg-emerald-500/20 flex items-center justify-center shrink-0">
@@ -105,6 +118,7 @@ export function DashboardSidebar() {
             </div>
           </SidebarMenuItem>
 
+          {/* LOGOUT */}
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
@@ -112,7 +126,7 @@ export function DashboardSidebar() {
             >
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 w-full text-left" 
+                className="flex items-center gap-2 w-full text-left"
               >
                 <LogOut className="w-4 h-4" />
                 <span>Logout</span>
