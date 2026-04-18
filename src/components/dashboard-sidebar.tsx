@@ -21,6 +21,7 @@ import {
   Leaf,
   Power,
   FileText,
+  BarChart3,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -30,6 +31,7 @@ import { signOut } from "next-auth/react";
 
 const mainNavItems = [
   { title: "Dashboard", icon: LayoutDashboard, href: "/dashboard" },
+  { title: "Analytics", icon: BarChart3, href: "/dashboard/analytics" },
   { title: "Device Control", icon: Power, href: "/dashboard/devices" },
   { title: "Logs", icon: FileText, href: "/dashboard/logs" },
 ];
