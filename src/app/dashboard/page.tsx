@@ -8,7 +8,6 @@ import { doc, setDoc } from "firebase/firestore"
 import { db } from "@/lib/firebase"
 
 export default function DashboardPage() {
-  // State untuk menyimpan data yang tampil di UI
   const [metrics, setMetrics] = useState({
     watt: 124.5,
     volt: 220.8,
@@ -16,12 +15,9 @@ export default function DashboardPage() {
     occupancy: 0,
   })
 
-  // Simulate real-time data updates & Send to Firebase
   useEffect(() => {
-    // Tambahkan "async" di sini karena kita mau pakai "await" untuk Firebase
     const interval = setInterval(async () => {
       
-      // 1. Generate data dummy
       const newData = {
         watt: 120 + Math.random() * 20,
         volt: 218 + Math.random() * 5,
@@ -32,9 +28,7 @@ export default function DashboardPage() {
 
       setMetrics(newData)
 
-      // 3. Kirim ke Firebase Firestore
       try {
-        // Kita simpan di koleksi "sensors", dokumen bernama "latest"
         const docRef = doc(db, "sensors", "latest");
         await setDoc(docRef, newData);
         console.log("✅ Berhasil update Firebase:", newData.watt.toFixed(2), "Watt");
